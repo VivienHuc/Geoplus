@@ -1,5 +1,5 @@
 {
-  "name": "Géo+",
+  "name": "geoplus",
   "version": "1.0.0",
   "description": "App with authentication system and leaflet map",
   "main": "app.js",

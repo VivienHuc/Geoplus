@@ -14,10 +14,10 @@ require('./config/passport')(passport);
 const db = require('./config/keys').MongoURI;
 
 // Connect to MongoDB
-var uri = "mongodb+srv://Bully:" + encodeURIComponent('admin') + "@cluster0-798oj.mongodb.net/pompiers?retryWrites=true";
+// var uri = "mongodb+srv://Bully:" + encodeURIComponent('admin') + "@cluster0-798oj.mongodb.net/pompiers?retryWrites=true";
 mongoose
 .connect(
-  uri,
+  "mongodb+srv://Bully:admin@cluster0-798oj.mongodb.net/pompiers?retryWrites=true",
   { useNewUrlParser: true }
 )
 .then(() => console.log('MongoDB Connected'))

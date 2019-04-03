@@ -1,0 +1,20 @@
+<h1>Map</h1>
+<a href="/dashboard" class="btn btn-secondary">Dashboard</a>
+<a href="/users/logout" class="btn btn-secondary">Logout</a>
+<br>
+<div class="buttons">
+  <div class="option col-md-5"">
+    <button type="button" class="btn btn-primary btn-block" onclick="not_seen_display()">Non vus</button>
+  </div>
+  <div class="option col-md-5"">
+    <button type="button" class="btn btn-primary btn-block" onclick="accepted_display()">Acceptés</button>
+  </div>
+  <div class="option col-md-5"">
+    <button type="button" class="btn btn-primary btn-block" onclick="declined_display()">Refusés</button>
+  </div>
+</div>
+<div id="map"></div>
+
+
+<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js" integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg==" crossorigin=""></script>
+<script src="/js/map.js" charset="utf-8"></script>

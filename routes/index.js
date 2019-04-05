@@ -16,6 +16,14 @@ var options = {
 };
 var geocoder = NodeGeocoder(options);
 
+// Fonctions
+function refreshID(habitants) {
+  for (var i = 0; i < habitants.length; i++) {
+    habitants[i].id = i;
+  }
+  return habitants;
+}
+
 // Welcome Page
 router.get('/', (req, res) => res.render('welcome'));
 
@@ -95,6 +103,16 @@ fs.readFile(__dirname + '/../views/js/db.json', (err, data) => {
   if (err) throw err;
   var habitants = JSON.parse(data);
   res.render('habitants_list', {habitants: habitants})
+})
+);
+router.post('/deleteHabitant', ensureAuthenticated, (req, res) =>
+fs.readFile(__dirname + '/../views/js/db.json', (err, data) => {
+  if (err) throw err;
+  var habitants = JSON.parse(data);
+  habitants.splice(req.body.i, 1);
+  habitants = refreshID(habitants);
+  fs.writeFileSync(__dirname + '/../views/js/db.json', JSON.stringify(habitants));
+  res.redirect('/dashboard');
 })
 );
 module.exports = router;

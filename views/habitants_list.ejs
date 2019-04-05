@@ -1,0 +1,24 @@
+<h1>Liste des Habitants</h1>
+<a href="/habitants" class="btn btn-secondary">Ajouter un habitant</a>
+<a href="/dashboard" class="btn btn-secondary">Dashboard</a>
+<a href="/map" class="btn btn-secondary">Map</a>
+<a href="/users/logout" class="btn btn-secondary">Logout</a>
+<br>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nom</th>
+      <th scope="col">Adresse</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% habitants.forEach(function(habitant){ %>
+      <tr>
+        <th scope="row">1</th>
+        <td><%-habitant.name%></td>
+        <td><%-habitant.address%></td>
+      </tr>
+      <% }); %>
+    </tbody>
+  </table>

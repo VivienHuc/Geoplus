@@ -88,6 +88,13 @@ fs.readFile(__dirname + '/../views/js/db.json', (err, data) => {
   })
   res.redirect('/dashboard');
 })
+);
 
+router.get('/habitants_list', ensureAuthenticated, (req, res) =>
+fs.readFile(__dirname + '/../views/js/db.json', (err, data) => {
+  if (err) throw err;
+  var habitants = JSON.parse(data);
+  res.render('habitants_list', {habitants: habitants})
+})
 );
 module.exports = router;

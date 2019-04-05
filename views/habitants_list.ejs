@@ -10,6 +10,7 @@
       <th scope="col">#</th>
       <th scope="col">Nom</th>
       <th scope="col">Adresse</th>
+      <th scope="col">Particiation</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
@@ -19,6 +20,7 @@
         <th scope="row"><%-habitant.id%></th>
         <td><%-habitant.name%></td>
         <td><%-habitant.address%></td>
+        <td><%-habitant.given%></td>
         <td><form action="/deleteHabitant" method="post">
           <input style="display: none" type="number" name="i" value="<%-habitant.id%>">
           <button class="btn btn-primary" type="submit" name="button">Supprimer</button>

@@ -7,7 +7,6 @@
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">#</th>
       <th scope="col">Nom</th>
       <th scope="col">Adresse</th>
       <th scope="col">Particiation</th>
@@ -17,12 +16,11 @@
   <tbody>
     <% habitants.forEach(function(habitant){ %>
       <tr>
-        <th scope="row"><%-habitant.id%></th>
-        <td><%-habitant.name%></td>
-        <td><%-habitant.address%></td>
-        <td><%-habitant.given%>€</td>
+        <td><%- habitant.name %></td>
+        <td><%- habitant.address %></td>
+        <td><%- habitant.given %>€</td>
         <td><form action="/deleteHabitant" method="post">
-          <input style="display: none" type="number" name="i" value="<%-habitant.id%>">
+          <input style="display: none" type="text" name="name" value="<%- habitant.name %>">
           <button class="btn btn-primary" type="submit" name="button">Supprimer</button>
         </form></td>
       </tr>

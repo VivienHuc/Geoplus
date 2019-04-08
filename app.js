@@ -10,16 +10,6 @@ const app = express();
 // Passport Config
 require('./config/passport')(passport);
 
-// Connect to MongoDB
-// const usersURI = "mongodb+srv://Bully:" + encodeURIComponent('pC2F8GayN3TB7h8T') + "@cluster0-798oj.mongodb.net/pompiers?retryWrites=true";
-// mongoose
-// .connect(
-//   usersURI,
-//   { useNewUrlParser: true }
-// )
-// .then(() => console.log('MongoDB Connected'))
-// .catch(err => console.log(err));
-
 // EJS
 app.use(expressLayouts);
 app.set('view engine', 'ejs');

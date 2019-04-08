@@ -4,10 +4,6 @@ var habitantsConnexion = mongoose.createConnection(habitantsURI, { useNewUrlPars
 
 
 const HabitantSchema = new mongoose.Schema({
-  id: {
-    type: Number,
-    default: 0
-  },
   name: {
     type: String,
     required: true

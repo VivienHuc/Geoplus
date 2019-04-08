@@ -17,14 +17,6 @@ var options = {
 };
 var geocoder = NodeGeocoder(options);
 
-// Fonctions
-function refreshID(habitants) {
-  for (var i = 0; i < habitants.length; i++) {
-    habitants[i].id = i;
-  }
-  return habitants;
-}
-
 // Welcome Page
 router.get('/', (req, res) => res.render('welcome'));
 
@@ -37,30 +29,35 @@ res.render('dashboard', {
 
 // Map
 router.get('/map', ensureAuthenticated, (req, res) =>
-res.render('map')
+Habitant.find({}, function(err, habitants) {
+  var habitants_list = [];
+  habitants.forEach(function(habitant) {
+    habitants_list.push(habitant);
+  });
+  fs.readFile(__dirname + '/../views/js/habitants.json', (err, data) => {
+    var habitants;
+    if (err) throw err;
+    habitants = habitants_list;
+    fs.writeFileSync(__dirname + '/../views/js/habitants.json', JSON.stringify(habitants));
+    res.render('map', { habitants: habitants_list })
+  });
+})
 );
-router.post('/map', function(req, res) {
-  if (req.body.given) {
-    fs.readFile(__dirname + '/../views/js/db.json', (err, data) => {
-      var habitants;
-      if (err) throw err;
-      habitants = JSON.parse(data);
-      var i = parseInt(req.body.i, 10)
-      habitants[i].given = req.body.given;
-      fs.writeFileSync(__dirname + '/../views/js/db.json', JSON.stringify(habitants));
-      if (req.body.given > 0) {
-        req.user.money += parseInt(req.body.given, 10);
-        req.user.save(function(err) {
-          if (err) return (err)
-          req.login(req.user, function(err) {
-            if (err) return (err)
-          })
-        })
-      }
-      res.redirect('/dashboard');
-    });
+router.post('/map', ensureAuthenticated, function(req, res) {
+  Habitant.findOneAndUpdate({_id : req.body.i}, {given : req.body.given}, function(err) {
+    if (err) return (err)
+  })
+  if (req.body.given > 0) {
+    req.user.money += parseInt(req.body.given, 10);
+    req.user.save(function(err) {
+      if (err) return (err)
+      req.login(req.user, function(err) {
+        if (err) return (err)
+        res.redirect('/map');
+      })
+    })
   } else {
-    // Erreur
+    res.redirect('/map');
   }
 });
 
@@ -68,52 +65,32 @@ router.post('/map', function(req, res) {
 router.get('/habitants', ensureAuthenticated, (req, res) =>
 res.render('habitants')
 );
-router.post('/habitants', ensureAuthenticated, (req, res) =>
-fs.readFile(__dirname + '/../views/js/db.json', (err, data) => {
-  var habitants;
-  if (err) throw err;
-  habitants = JSON.parse(data);
-  var i = habitants[0].id;
-  while (habitants[i]) {
-    i++;
-  }
-  var lat;
-  var lng;
+router.post('/habitants', ensureAuthenticated, function(req, res) {
   geocoder.geocode(req.body.address, function(err, res) {
-    lat = res[0].latitude.toString(10);
-    lng = res[0].longitude.toString(10);
-    var new_habitant = {
-      id: i,
+    var new_habitant = new Habitant({
       name: req.body.name,
-      address: req.body.address,
-      position: {
-        lat: lat,
-        lng: lng
-      },
-      given: "0"
-    };
-    habitants.push(new_habitant);
-    fs.writeFileSync(__dirname + '/../views/js/db.json', JSON.stringify(habitants));
-  })
-  res.redirect('/dashboard');
-})
-);
+      address : req.body.address,
+      position : [res[0].latitude, res[0].longitude],
+      given : "0"
+    });
+    console.log(new_habitant);
+    new_habitant.save(function handleError(err) {
+      if (err) return (err);
+      res.redirect('/map')
+    });
+  });
+});
 
 router.get('/habitants_list', ensureAuthenticated, (req, res) =>
-fs.readFile(__dirname + '/../views/js/db.json', (err, data) => {
-  if (err) throw err;
-  var habitants = JSON.parse(data);
-  res.render('habitants_list', {habitants: habitants})
+Habitant.find({}, function(err, habitants) {
+  res.render('habitants_list', { habitants : habitants })
 })
 );
 router.post('/deleteHabitant', ensureAuthenticated, (req, res) =>
-fs.readFile(__dirname + '/../views/js/db.json', (err, data) => {
-  if (err) throw err;
-  var habitants = JSON.parse(data);
-  habitants.splice(req.body.i, 1);
-  habitants = refreshID(habitants);
-  fs.writeFileSync(__dirname + '/../views/js/db.json', JSON.stringify(habitants));
-  res.redirect('/dashboard');
+Habitant.deleteOne({ name: req.body.name }, function(err) {
+  if (err) return (err)
+  res.redirect('/habitants_list')
 })
 );
+
 module.exports = router;

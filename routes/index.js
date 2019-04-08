@@ -4,6 +4,7 @@ const { ensureAuthenticated } = require('../config/auth');
 var path = require("path");
 const fs = require('fs');
 var NodeGeocoder = require('node-geocoder');
+const Habitant = require('../models/habitant');
 
 // NodeGeocoder Config
 var options = {

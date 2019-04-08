@@ -11,14 +11,14 @@ const app = express();
 require('./config/passport')(passport);
 
 // Connect to MongoDB
-const uri = "mongodb+srv://Bully:" + encodeURIComponent('pC2F8GayN3TB7h8T') + "@cluster0-798oj.mongodb.net/pompiers?retryWrites=true";
-mongoose
-.connect(
-  uri,
-  { useNewUrlParser: true }
-)
-.then(() => console.log('MongoDB Connected'))
-.catch(err => console.log(err));
+// const usersURI = "mongodb+srv://Bully:" + encodeURIComponent('pC2F8GayN3TB7h8T') + "@cluster0-798oj.mongodb.net/pompiers?retryWrites=true";
+// mongoose
+// .connect(
+//   usersURI,
+//   { useNewUrlParser: true }
+// )
+// .then(() => console.log('MongoDB Connected'))
+// .catch(err => console.log(err));
 
 // EJS
 app.use(expressLayouts);

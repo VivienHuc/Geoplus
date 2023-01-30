@@ -1,7 +1,7 @@
 {
   "name": "geoplus",
   "version": "1.0.0",
-  "description": "App with authentication system and leaflet map",
+  "description": "Simple ExpressJS app with authentication and leaflet",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",

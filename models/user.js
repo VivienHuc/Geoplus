@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const usersURI = "mongodb+srv://Bully:" + encodeURIComponent('pC2F8GayN3TB7h8T') + "@cluster0-798oj.mongodb.net/pompiers?retryWrites=true";
+const usersURI = "mongodb+srv://geoplus:" + encodeURIComponent('iLV63QiqVn4lbpKV') + "@cluster0.ksko1ps.mongodb.net/?retryWrites=true&w=majority";
 var usersConnexion = mongoose.createConnection(usersURI, { useNewUrlParser : true });
 
 

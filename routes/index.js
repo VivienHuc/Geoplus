@@ -9,11 +9,9 @@ const Habitant = require('../models/habitant');
 // NodeGeocoder Config
 var options = {
   provider: 'google',
-
-  // Optional depending on the providers
-  httpAdapter: 'https', // Default
-  apiKey: 'AIzaSyBMFYX5JdYmfZbZZfVLZjPM5cTez1AlDeY', // for Mapquest, OpenCage, Google Premier
-  formatter: 'JSON'         // 'gpx', 'string', ...
+  httpAdapter: 'https',
+  apiKey: 'AIzaSyBMFYX5JdYmfZbZZfVLZjPM5cTez1AlDeY',
+  formatter: 'JSON'
 };
 var geocoder = NodeGeocoder(options);
 

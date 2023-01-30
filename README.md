@@ -6,7 +6,9 @@ Geoplus is a Node.js application built with Express.js and EJS, with a JSON file
 
 To get started with Geoplus, follow these steps:
 
-1. Clone the repository: (VivienHuc/Geoplus)
+1. Clone the repository:
+
+``` git clone https://github.com/VivienHuc/Geoplus ```
 
 2. Change the directory to Geoplus:
 
